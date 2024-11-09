@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./style.css">
+    <title>Typing Speed Test</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Typing Speed Test</h1>
+
+        <button id="playButton" class="play-button">Lets Begin</button>
+
+        <div id="sentenceDisplay" class="sentence-display" hidden>
+            <!-- This will show the sentence fetched from the API. -->
+            Your content loading.....
+
+        </div>
+
+        <input type="text" id="inputField" class="input-field" placeholder="Start typing here.." hidden>
+
+        <div id="resultSection" class="result">
+            <!-- This will show results like WPM and accuracy -->
+            Game finished. Your WPM: 60 Accuracy: 100%
+
+        </div>
+    </div>
+    <script src="./index.js"></script>
+</body>
+</html>

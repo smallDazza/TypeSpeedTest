@@ -1,0 +1,41 @@
+body {
+    text-align: center;
+    display: flex;
+    align-items:  center;
+    justify-content: center;
+    background-color: beige;
+    
+}
+
+.container {
+    text-align: center;
+    padding: 20px;
+}
+
+.sentence-display {
+    color: brown;
+    padding: 10px;
+    margin-bottom: 20px;
+}
+
+.input-field {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+}
+
+.result {
+    color: gray;
+    margin-bottom: 20px;
+}
+
+.play-button {
+    padding: 8px 20px;
+    background-color: aquamarine;
+    border: none;
+    cursor: pointer;
+}
+
+.play-button:hover {
+    background-color: chartreuse;
+}
