@@ -3,11 +3,15 @@
 let correctCharacters = 0;
 let totalCharacters = 0;
 let startTime;
+let timer = 10;
+let timerInterval;
 
 const playButton = document.getElementById("playButton");
 const sentenceDisplay = document.getElementById("sentenceDisplay");
 const inputField = document.getElementById("inputField");
 const resultSection = document.getElementById("resultSection");
+const timerDisplay = document.getElementById("timerDisplay");
+
 
 
 async function getRandomSentence(wordCount){
@@ -44,14 +48,27 @@ function startGame(){
 
     inputField.style.display = "block";
     sentenceDisplay.style.display = "block";
+    timerDisplay.style.display = "block";
+}
+
+function startTimer(){
+    timerInterval = setInterval(() => {
+        if (timer > 0){
+            timer--;
+            timerDisplay.textContent = `Time Left: ${timer} seconds.`;
+        } else {
+            endGame();
+        }
+    }, 1000);
 }
 
 function trackTyping(){
-    console.log(startTime);
+    // console.log(startTime);
     if (!startTime) {
         // Record start time on first input
         startTime = new Date();
         console.log("time set:", startTime); 
+        startTimer();
     }
     
     const typedtext = inputField.value;
@@ -60,6 +77,9 @@ function trackTyping(){
     totalCharacters = typedtext.length;
     correctCharacters = countCorrectCharacters(typedtext, sentence);
 
+    if (typedtext === sentence){
+        endGame();
+    }
     updateStats();
 }
 
@@ -80,10 +100,12 @@ function countCorrectCharacters(typedtext, sentence){
 function updateStats(){
     const wpm = calculateWPM();
     const accuracy = (correctCharacters / totalCharacters) * 100; 
-    console.log("Accuracy: " , accuracy);
+    // console.log("Accuracy: " , accuracy);
+    displayResults(wpm, accuracy);
 }
 
-function displayResults(){
+function displayResults(wpm, accuracy){
+    resultSection.innerHTML = `WPM: ${wpm} | Accuracy: ${accuracy}%`;
 
 }
 
@@ -91,12 +113,23 @@ function calculateWPM(){
     // time in seconds
     const timeElapsed = (new Date() - startTime) / 1000;
     // return the correct words per minute
-    wpm = (correctCharacters / 5) / (timeElapsed / 60);
+    wpm = Math.floor(correctCharacters / 5) / (timeElapsed / 60);
     console.log("Words Per min: ",wpm);
+    return wpm;
    
 
 }
 
 function endGame(){
+    // stop the timer
+    clearInterval(timerInterval);
+    //disable the input field
+    inputField.style.display = "none";
+
+    //calculate the final accuracy
+    const accuracy = Math.floor((correctCharacters / totalCharacters) * 100);
+    
+    //display the result in thee div
+    resultSection.innerHTML = `<p>Game Over! Your Final WPM: ${wpm} | Accuracy: ${accuracy}%</p>`;
 
 }

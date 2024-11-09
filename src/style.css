@@ -39,3 +39,8 @@ body {
 .play-button:hover {
     background-color: chartreuse;
 }
+
+.timer-display{
+    color: blue;
+    margin-top: 10px;
+}
