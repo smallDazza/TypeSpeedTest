@@ -149,6 +149,8 @@ function endGame(){
     //disable the input field
     inputField.style.display = "none";
 
+    wpm = calculateWPM();
+
     //calculate the final accuracy
     const accuracy = Math.floor((correctCharacters / totalCharacters) * 100);
 
